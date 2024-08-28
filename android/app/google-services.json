@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "879927221521",
+    "firebase_url": "https://campuslink-d1f2d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "campuslink-d1f2d",
+    "storage_bucket": "campuslink-d1f2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879927221521:android:6c90c1bd25ebc4f4b1c0b0",
+        "android_client_info": {
+          "package_name": "com.campuslink.kcgerp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCishefTquUez42NWNNToO61QKxIomFJkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879927221521:android:c46c67a6f1ea8b6eb1c0b0",
+        "android_client_info": {
+          "package_name": "com.example.faculty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCishefTquUez42NWNNToO61QKxIomFJkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879927221521:android:e890f086f7ad445eb1c0b0",
+        "android_client_info": {
+          "package_name": "com.example.kcgerp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCishefTquUez42NWNNToO61QKxIomFJkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

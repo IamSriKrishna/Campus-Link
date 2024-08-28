@@ -2,29 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
+	<key>UIBackgroundModes</key>
 	<array>
-		<string>freecharge</string>
-		<string>gpay</string>
-		<string>in.fampay.app</string>
-		<string>lotza</string>
-		<string>mobikwik</string>
-		<string>paytm</string>
-		<string>phonepe</string>
-		<string>upi</string>
-		<string>upibillpay</string>
-		<string>whatsapp</string>
-	</array> 
-	<key>CFBundleAllowMixedLocalizations<key>
-	<string>This app needs share access</string>
-	<key>CFBundleDevelopmentRegion<key>
-	<string>This app needs share access</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app needs camera access to scan QR codes</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs photos access to get QR code from photo library</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Why is my app authenticating using face id?</string>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your description here</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your description here</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>describe why the app needs access to the user’s location information all the time (foreground and background)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>describe why the app needs access to the user’s location information when the app is running in the foreground</string>
+	<key>com.apple.security.network.client</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -64,14 +58,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We want image </string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Download image </string>
-	<key>NSCameraUsageDescription</key>
-	<string>We want Camera </string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow Microphone</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

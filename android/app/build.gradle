@@ -49,9 +49,9 @@ android {
         applicationId "com.campuslink.kcgerp"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion flutter.targetSdkVersion
-        versionCode 36
+        minSdkVersion 22
+        targetSdkVersion 34
+        versionCode 38
         versionName flutterVersionName
     }
     signingConfigs {

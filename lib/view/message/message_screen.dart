@@ -1,9 +1,9 @@
+import 'package:campuslink/handler/messenger/messenger_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:campuslink/bloc/fcm/fcm_bloc.dart';
 import 'package:campuslink/bloc/fcm/fcm_event.dart';
 import 'package:campuslink/bloc/message/message_bloc.dart';
 import 'package:campuslink/bloc/message/message_event.dart';
-import 'package:campuslink/handler/messenger/messenger_handler.dart';
 import 'package:campuslink/handler/socket/message_socket.dart';
 import 'package:campuslink/widget/message/message_widget.dart';
 import 'package:campuslink/provider/auth_provider.dart';
@@ -36,6 +36,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
   @override
   void initState() {
+    SocketService.joinChat(widget.chatId,context);
     super.initState();
     NotificationHandler.setOnChatScreen(true);
     _initializeSocketAndMessages();
@@ -43,7 +44,6 @@ class _MessageScreenState extends State<MessageScreen> {
 
   void _initializeSocketAndMessages() {
     context.read<MessageBloc>().add(GetMessageEvent(chatId: widget.chatId));
-    SocketService.connect(context, widget.chatId);
   }
 
   void _sendMessage() {
@@ -98,6 +98,7 @@ class _MessageScreenState extends State<MessageScreen> {
     NotificationHandler.setOnChatScreen(false);
     _scrollController.dispose();
     _messageController.dispose();
+    SocketService.leaveChat(widget.chatId);
     super.dispose();
   }
 }

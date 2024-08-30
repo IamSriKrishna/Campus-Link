@@ -7,7 +7,7 @@ import 'package:campuslink/controller/form/form_controller.dart';
 import 'package:campuslink/controller/message/message_controller.dart';
 import 'package:campuslink/controller/post/post_controller.dart';
 import 'package:campuslink/controller/student/student_controller.dart';
-import 'package:campuslink/handler/socket/socket_handler.dart';
+//import 'package:campuslink/handler/socket/socket_handler.dart';
 
 class AppController {
   //controller
@@ -22,5 +22,5 @@ class AppController {
   static MessageController messageController = MessageController();
 
   //websocket
-  static WebSocketService webSocketService = WebSocketService();
+  //static WebSocketService webSocketService = WebSocketService();
 }

@@ -1,3 +1,4 @@
+import 'package:campuslink/handler/socket/message_socket.dart';
 import 'package:flutter/material.dart';
 import 'package:campuslink/widget/bottom/bottom_widget.dart';
 
@@ -9,6 +10,11 @@ class BottomScreen extends StatefulWidget {
 }
 
 class _BottomScreenState extends State<BottomScreen> {
+  @override
+  void initState() {
+    SocketService.connect(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

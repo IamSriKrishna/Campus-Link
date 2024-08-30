@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuslink/bloc/chat/chat_event.dart';
 import 'package:campuslink/bloc/chat/chat_state.dart';
 import 'package:campuslink/controller/chat/chat_controller.dart';
-import 'package:campuslink/handler/socket/socket_handler.dart';
+//import 'package:campuslink/handler/socket/socket_handler.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ChatController _chatController;
-  final WebSocketService _webSocketService;
-  ChatBloc(this._chatController, this._webSocketService)
+  //final WebSocketService _webSocketService;
+  ChatBloc(this._chatController)
       : super(InitialChatState()) {
-    _webSocketService.connect();
+    //_webSocketService.connect();
     on<GetChatEvent>((event, emit) async {
       try {
         final prefs = GetStorage();
@@ -53,12 +53,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       }
     });
 
-    _webSocketService.getStream().listen((data) {
-      add(GetChatEvent());
-    });
+    // _webSocketService.getStream().listen((data) {
+    //   add(GetChatEvent());
+    // });
 
     on<ClearChatEvent>((event, emit) {
-      _webSocketService.disconnect();
+     // _webSocketService.disconnect();
       emit(ExitChatState());
     });
   }

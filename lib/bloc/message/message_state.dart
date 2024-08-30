@@ -21,3 +21,13 @@ class GetMessageState extends MessageState {
 }
 
 class ExitMessageState extends MessageState {}
+
+class OnlineMessageState extends MessageState {
+  final bool isOnline;
+  OnlineMessageState({required this.isOnline});
+}
+
+class TextingMessageState extends MessageState {
+  final bool texting;
+  TextingMessageState({required this.texting});
+}

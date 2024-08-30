@@ -75,7 +75,7 @@ class BlocRoute {
       //chat bloc
       BlocProvider(
         create: (context) {
-          final chatBloc = ChatBloc(AppController.chatController,AppController.webSocketService);
+          final chatBloc = ChatBloc(AppController.chatController);
           chatBloc.add(GetChatEvent());
           return chatBloc;
         },

@@ -11,36 +11,56 @@ import 'package:iconsax/iconsax.dart';
 
 class MessageWidget {
   static Widget sliverAppBar({required String name, required String dp}) {
-    return SliverAppBar(
-      floating: false,
-      elevation: 0,
-      pinned: true,
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: const Icon(
-          Iconsax.arrow_left,
-          color: AppPalette.mette,
-        ),
-      ),
-      backgroundColor: Colors.white,
-      leadingWidth: 20.w,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(17.sw),
-              child: CachedNetworkImage(
-                  fit: BoxFit.cover, height: 35, width: 35, imageUrl: dp)),
-          Padding(
-            padding: EdgeInsets.only(left: 5.0.w),
-            child: Components.googleFonts(
-              text: name,
+    return BlocBuilder<MessageBloc, MessageState>(
+      buildWhen: (previous, current) {
+        return current is OnlineMessageState || previous is OnlineMessageState;
+      },
+      builder: (context, state) {
+        bool isOnline = false;
+        if (state is OnlineMessageState) {
+          isOnline = state.isOnline;
+          
+        }
+
+        return SliverAppBar(
+          floating: false,
+          elevation: 0,
+          pinned: true,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Iconsax.arrow_left,
+              color: AppPalette.mette,
             ),
-          )
-        ],
-      ),
+          ),
+          backgroundColor: Colors.white,
+          leadingWidth: 20.w,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(17.sw),
+                  child: CachedNetworkImage(
+                      fit: BoxFit.cover, height: 35, width: 35, imageUrl: dp)),
+              Padding(
+                padding: EdgeInsets.only(left: 5.0.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Components.googleFonts(
+                      text: name,
+                    ),
+                    Components.googleFonts(
+                        text: isOnline ? "online" : "offline"),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 

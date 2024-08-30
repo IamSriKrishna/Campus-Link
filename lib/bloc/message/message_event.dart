@@ -1,7 +1,3 @@
-// message_event.dart
-
-import 'package:campuslink/model/message/message.dart';
-
 abstract class MessageEvent {}
 
 class ConnectSocketMessageEvent extends MessageEvent {}
@@ -26,8 +22,16 @@ class SendMessageEvent extends MessageEvent {
 
 class ClearMessageEvent extends MessageEvent {}
 
-class IncomingMessageEvent extends MessageEvent {
-  final Message message;
-  
-  IncomingMessageEvent({required this.message});
+class UserOnlineStatusEvent extends MessageEvent {
+  final String userId;
+  final bool isOnline;
+
+  UserOnlineStatusEvent({required this.userId, required this.isOnline});
+}
+
+class UserTypingStatusEvent extends MessageEvent {
+  final String userId;
+  final bool isTyping;
+
+  UserTypingStatusEvent({required this.userId, required this.isTyping});
 }

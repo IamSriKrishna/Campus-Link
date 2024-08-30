@@ -84,5 +84,15 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     on<ClearMessageEvent>((event, emit) {
       emit(ExitMessageState());
     });
+    // Handle online status updates
+    on<UserOnlineStatusEvent>((event, emit) async {
+      emit(OnlineMessageState(isOnline: event.isOnline));
+
+    });
+
+    // Handle typing status updates
+    on<UserTypingStatusEvent>((event, emit) async {
+      emit(TextingMessageState(texting: event.isTyping));
+    });
   }
 }

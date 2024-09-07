@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuslink/bloc/student/student_event.dart';
 import 'package:campuslink/bloc/student/student_state.dart';
@@ -24,17 +25,22 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
       }
     });
 
-    on<FetchStudentEvent>((event, emit) async {
-      emit(LoadingStudentState());
+    on<UpdateBioEvent>((event, emit) async {
       try {
+        emit(LoadingStudentState());
         final prefs = GetStorage();
         final userId = prefs.read("userId");
         if (userId == null) {
           throw Exception('User ID not found');
         }
-        final student = await _studentController.getStudentById(userId);
-        emit(FetchStudentSuccessState(student: student));
+        final success = await _studentController.updateBio(
+            studentId: userId, bio: event.bio);
+        await Future.delayed(const Duration(seconds: 5));
+        if (success) {
+          emit(SuccessStudentState());
+        }
       } catch (e) {
+        debugPrint(e.toString());
         emit(FailedStudentState(error: e.toString()));
       }
     });

@@ -63,7 +63,7 @@ class AppContent {
   static const post = "Post";
   static const followers = "Followers";
   static const following = "Following";
-  static const editProfile = "Edit Profile";
+  static const editProfile = "Edit profile";
 
   //auth
   static const loginContent = "Let's Sign you in.";
@@ -82,10 +82,30 @@ class AppContent {
   static const noNetwork =
       "Oops! Looks like the internet decided to take a coffee break. Time to practice your telepathy skills! 🌐💤";
   static const titleNoNetwork = "No internet?";
-  static const dpImage =
-      "https://media.istockphoto.com/id/517998264/vector/male-user-icon.jpg?s=612x612&w=0&k=20&c=4RMhqIXcJMcFkRJPq6K8h7ozuUoZhPwKniEke6KYa_k=";
   static const follow = "Follow";
   static const message = "Message";
+
   //form
   static const gatePass = "Gate Pass";
+
+  //Event
+  static const event = "Event";
+
+  //Image
+  static const dpImage =
+      "https://media.istockphoto.com/id/517998264/vector/male-user-icon.jpg?s=612x612&w=0&k=20&c=4RMhqIXcJMcFkRJPq6K8h7ozuUoZhPwKniEke6KYa_k=";
+  static String maleAvatar =
+      "https://img.freepik.com/premium-photo/3d-portraits-happy-people-white-background-cartoon-characters-boy-man-vector-illustration_623919-4029.jpg?w=826";
+  static String femaleAvatar =
+      "https://img.freepik.com/premium-photo/3d-rendering-cute-cartoon-girl-with-glasses-isolated-white-background_1308157-8781.jpg?w=826";
+  static String errorImage =
+      'https://cdn.pixabay.com/photo/2024/07/20/17/12/warning-8908707_1280.png';
+  //profile
+  static String editAvatarOrProfile = "Edit Profile or avatar";
+  static String newProfilePicture = "New profile picture";
+  static String changeAvatar = "Change avatar";
+  static String name = "Name";
+  static String classText = "Class";
+  static String bio = "Bio";
+  static String selectImage = "Select Image";
 }

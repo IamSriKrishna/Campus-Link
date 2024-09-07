@@ -32,6 +32,9 @@ class AuthProvider with ChangeNotifier {
       await refreshStudentData();
     } else {
       _isAuthenticated = false;
+      _token = null;
+      _user = null;
+      _student = null;
     }
     notifyListeners();
   }
@@ -43,7 +46,8 @@ class AuthProvider with ChangeNotifier {
         _student = student;
         notifyListeners();
       } catch (e) {
-        throw Exception(e);
+        // Handle error, e.g., show error message
+        debugPrint('Error fetching student data: $e');
       }
     }
   }

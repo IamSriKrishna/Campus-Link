@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:campuslink/app/app_content.dart';
 import 'package:campuslink/app/url.dart';
@@ -23,14 +24,36 @@ class PostController {
         throw Exception('Failed to load data');
       }
     } catch (e) {
-      PostModel? postModel = await _postdatabaseHelper.getPostModel();
-      if (postModel != null) {
-        return postModel;
+      if (e is SocketException) {
+        PostModel? postModel = await _postdatabaseHelper.getPostModel();
+        if (postModel != null) {
+          return postModel;
+        } else {
+          throw Exception('No local data available while offline');
+        }
       } else {
-        throw Exception('Failed to load data and no local data available');
+        // Handle other errors
+        throw Exception('Failed to load data: ${e.toString()}');
       }
     }
   }
 
+  Future<bool> likePost(
+      {required String studentId, required String postId}) async {
+    try {
+      Response res = await _dio.post(Url.likePost,
+          options: Options(headers: AppContent.headers),
+          data: {"postId": postId, "studentId": studentId});
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   PostModel _parseJson(Map<String, dynamic> json) => PostModel.fromJson(json);
+
 }

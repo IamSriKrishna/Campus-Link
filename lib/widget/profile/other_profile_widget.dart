@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:campuslink/widget/profile/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,14 +50,9 @@ class OtherProfileWidget {
                 children: [
                   Hero(
                     tag: student.id,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(45.w),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        height: 90.w,
-                        width: 90.w,
-                        imageUrl: student.dp,
-                      ),
+                    child: ProfilePicture(
+                      image: student.dp,
+                      avatar: AppContent.femaleAvatar,
                     ),
                   ),
 

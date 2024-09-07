@@ -5,4 +5,7 @@ class StudentSearchEvent extends StudentEvent {
   StudentSearchEvent({required this.name});
 }
 
-class FetchStudentEvent extends StudentEvent {}
+class UpdateBioEvent extends StudentEvent {
+  final String bio;
+  UpdateBioEvent({required this.bio});
+}

@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
             ProfileWidget.nameAndBio(context),
             ProfileWidget.editProfile(),
             ProfileWidget.gridDivider(),
-            ProfileWidget.gridPost()
+            ProfileWidget.gridPost(context)
           ],
         ),
       ),

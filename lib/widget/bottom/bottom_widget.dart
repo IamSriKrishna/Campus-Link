@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:campuslink/view/event/event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,6 @@ import 'package:campuslink/bloc/auth/auth_state.dart';
 import 'package:campuslink/bloc/bottom/bottom_bloc.dart';
 import 'package:campuslink/bloc/bottom/bottom_event.dart';
 import 'package:campuslink/bloc/bottom/bottom_state.dart';
-import 'package:campuslink/view/favourite/favourite.dart';
 import 'package:campuslink/view/home/home_screen.dart';
 import 'package:campuslink/view/pass/pass_screen.dart';
 import 'package:campuslink/view/profile/profile_screen.dart';
@@ -121,7 +121,7 @@ class BottomWidget {
     const HomeScreen(),
     const SearchScreen(),
     const PassScreen(),
-    const Favourite(),
-    const ProfileScreen()
+    const EventScreen(),
+    const ProfileScreen(),
   ];
 }

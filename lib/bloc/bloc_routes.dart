@@ -1,3 +1,5 @@
+import 'package:campuslink/bloc/event/events_bloc.dart';
+import 'package:campuslink/bloc/event/events_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuslink/app/app_controller.dart';
 import 'package:campuslink/bloc/auth/auth_bloc.dart';
@@ -54,13 +56,20 @@ class BlocRoute {
           return studentBloc;
         },
       ),
+      //get Event Data
+      BlocProvider(
+        create: (context) {
+          final eventBloc = EventsBloc(AppController.eventController);
+
+          eventBloc.add(GetEventsEvent());
+          return eventBloc;
+        },
+      ),
+      //get particular student data
       BlocProvider(
         create: (context) {
           final studentBloc = StudentBloc(AppController.studentController);
 
-          studentBloc.add(
-            FetchStudentEvent(),
-          );
           return studentBloc;
         },
       ),

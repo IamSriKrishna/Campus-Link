@@ -81,18 +81,10 @@ class _FollowWidgetState extends State<FollowWidget> {
   void _handleMessage() async {
     final chatBloc = context.read<ChatBloc>();
     chatBloc.add(CreateChatEvent(userId: widget.student.id));
-
-    // Ensure the subscription is declared outside to be reused and cancelled
     StreamSubscription<ChatState>? subscription;
 
-    // Listen to the ChatBloc's stream
     subscription = chatBloc.stream.listen((state) {
-      //print('State received: $state'); // Add this to debug
-
       if (state is SuccessChatState) {
-        //print('Navigating to MessageScreen'); // Add this to debug
-
-        // Reset message state or perform necessary actions here
         final fcmToken =
             widget.student.fcmtoken.isEmpty ? "null" : widget.student.fcmtoken;
         // Navigate to MessageScreen
@@ -108,12 +100,9 @@ class _FollowWidgetState extends State<FollowWidget> {
           transition: t.Transition.rightToLeft,
         );
 
-        // Cancel the subscription after handling the state
         subscription?.cancel();
       }
     });
-
-    //print("Subscription active: $subscription");
   }
 
   @override
@@ -146,16 +135,36 @@ class _FollowWidgetState extends State<FollowWidget> {
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: _isFollowing
-                ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppPalette.mette,
-                      minimumSize: Size(double.infinity, 30.h),
-                    ),
-                    onPressed: _isButtonDisabled ? null : _handleFollowUnfollow,
-                    child: Components.googleFonts(
-                      text: AppContent.following,
-                      color: Colors.white,
-                    ),
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppPalette.mette,
+                          minimumSize: Size(155.w, 30.h),
+                        ),
+                        onPressed:
+                            _isButtonDisabled ? null : _handleFollowUnfollow,
+                        child: Components.googleFonts(
+                          text: AppContent.following,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0.w),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppPalette.mette,
+                            minimumSize: Size(155.w, 30.h),
+                          ),
+                          onPressed: _handleMessage,
+                          child: Components.googleFonts(
+                            text: AppContent.message,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,

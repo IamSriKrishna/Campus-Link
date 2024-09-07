@@ -28,23 +28,26 @@ class Student {
   String year;
   List<dynamic> followers;
   List<dynamic> following;
+  List<dynamic> posts;
   String bio;
-  Student(
-      {this.id = "",
-      this.name = "",
-      this.fcmtoken = "",
-      this.certified = false,
-      this.rollno = 0,
-      this.password = "",
-      this.department = "",
-      this.credit = 0,
-      this.token = "",
-      this.dp = "",
-      this.year = "",
-      this.bio = "",
-      this.studentclass = "",
-      this.followers = const [],
-      this.following = const []});
+  Student({
+    this.id = "",
+    this.name = "",
+    this.fcmtoken = "",
+    this.certified = false,
+    this.rollno = 0,
+    this.password = "",
+    this.department = "",
+    this.credit = 0,
+    this.token = "",
+    this.dp = "",
+    this.year = "",
+    this.bio = "",
+    this.studentclass = "",
+    this.followers = const [],
+    this.following = const [],
+    this.posts = const [],
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -61,6 +64,7 @@ class Student {
       'Studentclass': studentclass,
       'following': following,
       'followers': followers,
+      "posts": posts,
       "bio": bio,
       'token': token,
     };
@@ -78,6 +82,7 @@ class Student {
         year: map['year'] ?? '',
         followers: List<String>.from(map['followers'] ?? []),
         following: List<String>.from(map['following'] ?? []),
+        posts: List<String>.from(map['posts'] ?? []),
         studentclass: map['Studentclass'] ?? '',
         department: map['department'] ?? '',
         credit: map['credit'] ?? 0,
@@ -97,6 +102,7 @@ class Student {
       year: json['year'] ?? '',
       followers: List<String>.from(json['followers'] ?? []),
       following: List<String>.from(json['following'] ?? []),
+      posts: List<String>.from(json['posts'] ?? []),
       studentclass: json['Studentclass'] ?? '',
       department: json['department'] ?? '',
       credit: json['credit'] ?? 0,

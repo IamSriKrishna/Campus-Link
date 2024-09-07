@@ -9,10 +9,13 @@ class Url {
 
   //post
   static String getAllPost = "$baseurl/post/getAllPostData";
+  static String likePost = "$baseurl/posts/likes";
+  static String getComment = "$baseurl/posts/get-comments";
 
   //student
   static String getStudentBySearch = "$baseurl/students/search";
   static String login = "$baseurl/kcg/student/signin";
+  static String updateBio = "$baseurl/students/update-bio";
   static String getStudentDataByID = "$baseurl/student";
 
   //fcm
@@ -32,6 +35,10 @@ class Url {
   static String getMessage = '$baseurl/get-message';
   static String createChat = "$baseurl/create-chat/";
   static String getChat = "$baseurl/get-chat/";
+
+  //event
+  static String getAllEvent = "$baseurl/kcg/getall-events";
+  static String addViews = "$baseurl/kcg/update-views";
 
   //websocket
   static String chatWebSocket = "ws://$ip:3005";

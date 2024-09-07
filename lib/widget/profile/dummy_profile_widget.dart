@@ -104,10 +104,7 @@ class DummyProfileWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Components.googleFonts(
-                text: user.name,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                maxlines: 3),
+                text: user.name, fontSize: 16.sp, fontWeight: FontWeight.w600),
             Components.googleFonts(
               text: user.bio,
               fontSize: 14.sp,

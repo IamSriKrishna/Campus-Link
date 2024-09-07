@@ -1,4 +1,6 @@
 // import 'package:flutter/material.dart';
+import 'package:campuslink/bloc/event/events_bloc.dart';
+import 'package:campuslink/bloc/event/events_event.dart';
 import 'package:flutter/widgets.dart';
 import 'package:campuslink/app/url.dart';
 import 'package:campuslink/bloc/message/message_bloc.dart';
@@ -27,16 +29,12 @@ class SocketService {
     );
 
     socket?.onConnect((_) {
-      print("$userId connected to socket");
       setupUser(userId);
     });
 
-    socket?.onDisconnect((_) {
-      print('Disconnected from socket server');
-    });
+    socket?.onDisconnect((_) {});
 
     socket?.on('online-user', (userId) {
-      print("Received online-user event for $userId");
       context
           .read<MessageBloc>()
           .add(UserOnlineStatusEvent(userId: userId, isOnline: true));
@@ -48,19 +46,30 @@ class SocketService {
           .add(UserTypingStatusEvent(userId: userId, isTyping: true));
     });
 
+    socket?.on('event-created', (eventData) {
+      print("Event created received: $eventData");
+      context
+          .read<EventsBloc>()
+          .add(GetEventsEvent()); // Trigger a refresh of the events list
+    });
+
+    socket?.on('event updated', (eventData) {
+      print("Event updated received: $eventData");
+      context.read<EventsBloc>().add(GetEventsEvent());
+    });
+
     socket?.on('stop typing', (userId) {
       context
           .read<MessageBloc>()
           .add(UserTypingStatusEvent(userId: userId, isTyping: false));
     });
   }
-  
+
   static void setupUser(String userId) {
     socket?.emit('setup', userId);
   }
 
   static void joinChat(String chatId, BuildContext context) {
-    print('Join chat:${chatId}');
     socket?.emit('join chat', chatId);
     socket?.on('message received', (data) {
       context.read<MessageBloc>().add(GetMessageEvent(chatId: chatId));
@@ -68,7 +77,6 @@ class SocketService {
   }
 
   static void leaveChat(String chatId) {
-    print('Exit chat:${chatId}');
     if (socket != null && socket!.connected) {
       socket?.emit('setupOff', chatId);
     }

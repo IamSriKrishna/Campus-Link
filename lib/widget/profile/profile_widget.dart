@@ -1,4 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:campuslink/bloc/post/post_bloc.dart';
+import 'package:campuslink/bloc/post/post_state.dart';
+import 'package:campuslink/provider/auth_provider.dart';
+import 'package:campuslink/view/edit_profile/edit_profile.dart';
+import 'package:campuslink/widget/profile/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +14,10 @@ import 'package:campuslink/bloc/auth/auth_state.dart';
 import 'package:campuslink/widget/components/components.dart';
 import 'package:campuslink/widget/components/show_widget.dart';
 import 'package:campuslink/widget/profile/dummy_profile_widget.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:get/get_navigation/get_navigation.dart' as t;
+import 'package:provider/provider.dart';
 
 class ProfileWidget {
   static Widget appBar(BuildContext context) {
@@ -74,16 +82,10 @@ class ProfileWidget {
                 height: 85.h,
                 child: Row(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(45.w),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        height: 90.w,
-                        width: 90.w,
-                        imageUrl: state.student.dp,
-                      ),
+                    ProfilePicture(
+                      image: state.student.dp,
+                      avatar: AppContent.maleAvatar,
                     ),
-
                     //post, followers and following
                     Expanded(
                         child: Container(
@@ -92,9 +94,15 @@ class ProfileWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          content(count: 0, title: AppContent.post),
-                          content(count: state.student.followers.length, title: AppContent.followers),
-                          content(count: state.student.following.length, title: AppContent.following),
+                          content(
+                              count: state.student.posts.length,
+                              title: AppContent.post),
+                          content(
+                              count: state.student.followers.length,
+                              title: AppContent.followers),
+                          content(
+                              count: state.student.following.length,
+                              title: AppContent.following),
                         ],
                       ),
                     ))
@@ -159,7 +167,10 @@ class ProfileWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 10.h),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: AppPalette.mette),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const EditProfile(),
+                  transition: t.Transition.rightToLeft);
+            },
             child: Components.googleFonts(
                 text: AppContent.editProfile, color: Colors.white)),
       ),
@@ -187,13 +198,38 @@ class ProfileWidget {
     );
   }
 
-  static Widget gridPost() {
-    return SliverGrid.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, mainAxisSpacing: 1, crossAxisSpacing: 1),
-      itemBuilder: (context, index) {
-        return Container(
-          color: AppPalette.mette.withOpacity(0.2),
+  static Widget gridPost(BuildContext context) {
+    final student = Provider.of<AuthProvider>(context).student!;
+    return BlocBuilder<PostBloc, PostState>(
+      builder: (context, state) {
+        if (state is ReadPostState) {
+          // Filter posts based on senderId
+          final filteredData = state.postModel.data
+              .where((post) => post.sender.id == student.id)
+              .toList();
+          return SliverGrid.builder(
+            itemCount: filteredData.isEmpty?100:filteredData.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, mainAxisSpacing: 1, crossAxisSpacing: 1),
+            itemBuilder: (context, index) {
+              if (filteredData.isEmpty) {
+                return Container(
+                  color: AppPalette.mette.withOpacity(0.2),
+                );
+              }
+              return CachedNetworkImage(
+                  imageUrl: filteredData[index].imageUrl[0]);
+            },
+          );
+        }
+        return SliverGrid.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, mainAxisSpacing: 1, crossAxisSpacing: 1),
+          itemBuilder: (context, index) {
+            return Container(
+              color: AppPalette.mette.withOpacity(0.2),
+            );
+          },
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:campuslink/controller/auth/auth_controller.dart';
 import 'package:campuslink/controller/chat/chat_controller.dart';
 import 'package:campuslink/controller/credit/credit_controller.dart';
+import 'package:campuslink/controller/event/event_controller.dart';
 import 'package:campuslink/controller/fcm/fcm_controller.dart';
 import 'package:campuslink/controller/follow/follow_controller.dart';
 import 'package:campuslink/controller/form/form_controller.dart';
@@ -20,6 +21,7 @@ class AppController {
   static FollowController followController = FollowController();
   static ChatController chatController = ChatController();
   static MessageController messageController = MessageController();
+  static EventController eventController = EventController();
 
   //websocket
   //static WebSocketService webSocketService = WebSocketService();

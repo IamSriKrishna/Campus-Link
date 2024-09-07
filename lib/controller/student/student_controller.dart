@@ -4,7 +4,7 @@ import 'package:campuslink/app/app_query.dart';
 import 'package:campuslink/app/url.dart';
 import 'package:campuslink/db/student_database.dart';
 import 'package:campuslink/model/student/student.dart';
-import 'package:campuslink/model/student/student_with_following.dart';
+import 'package:flutter/material.dart';
 
 class StudentController {
   final Dio _dio = Dio();
@@ -33,27 +33,24 @@ class StudentController {
     }
   }
 
-  //get student list by their ID
-  Future<StudentWithFollowing> getStudentById(String studentId) async {
+ 
+
+  Future<bool> updateBio({
+    required String studentId,
+    required String bio,
+  }) async {
     try {
-      final response = await _dio.get(
-        Url.refreshFollow,
-        queryParameters: {"studentId": studentId},
-        options: Options(headers: AppContent.headers),
-      );
-
-      if (response.statusCode == 200) {
-        // get the student data
-        final studentData = response.data['student'];
-        StudentWithFollowing student =
-            StudentWithFollowing.fromMap(studentData);
-
-        return student;
+      Response res = await _dio.post(Url.updateBio,
+          options: Options(headers: AppContent.headers),
+          data: {"bio": bio, "studentId": studentId});
+      debugPrint(res.statusCode.toString());
+      if (res.statusCode == 200) {
+        return true;
       } else {
-        throw Exception('Failed to load student');
+        return false;
       }
     } catch (e) {
-      throw Exception('Failed to load data and no local data available');
+      throw Exception(e);
     }
   }
 

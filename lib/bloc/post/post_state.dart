@@ -19,3 +19,5 @@ class ReadPostState extends PostState {
   final PostModel postModel;
   ReadPostState({required this.postModel});
 }
+
+class LikePostState extends PostState {}

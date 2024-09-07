@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuslink/app/app_key.dart';
-import 'package:campuslink/bloc/student/student_bloc.dart';
-import 'package:campuslink/bloc/student/student_event.dart';
 import 'package:campuslink/view/chat/chat_screen.dart';
 import 'package:campuslink/widget/components/helper_functions.dart';
 import 'package:campuslink/widget/home/home_widget.dart';
@@ -17,11 +14,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
 
-  @override
-  void initState() {
-    context.read<StudentBloc>().add(FetchStudentEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                 }),
-                HomeWidget.story(context),
+                //HomeWidget.story(context),
                 HomeWidget.post(),
               ],
             ),

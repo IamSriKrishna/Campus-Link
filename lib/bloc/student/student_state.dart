@@ -1,5 +1,4 @@
 import 'package:campuslink/model/student/student.dart';
-import 'package:campuslink/model/student/student_with_following.dart';
 
 abstract class StudentState {}
 
@@ -16,11 +15,6 @@ class FailedStudentState extends StudentState {
   FailedStudentState({required this.error});
 }
 
-class FetchStudentSuccessState extends StudentState {
-  final StudentWithFollowing student;
-
-  FetchStudentSuccessState({required this.student});
-}
 
 class ReadSearchStudentState extends StudentState {
   final StudentModel studentModel;
